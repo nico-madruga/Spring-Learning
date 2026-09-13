@@ -2,6 +2,7 @@ package br.com.comofazisso.aprendendoafazerisso.service;
 
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioRequestDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioResponseDTO;
+import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioUpdateDTO;
 import br.com.comofazisso.aprendendoafazerisso.entity.Usuario;
 import br.com.comofazisso.aprendendoafazerisso.mapper.UsuarioMapper;
 import br.com.comofazisso.aprendendoafazerisso.repository.UsuarioRepository;
@@ -47,5 +48,22 @@ public class UsuarioService
         Usuario userEncontrado = user.orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
 
         return userMap.toDTO(userEncontrado);
+    }
+
+    public UsuarioResponseDTO atualizar(Long id, UsuarioUpdateDTO userData)
+    {
+        Optional<Usuario> user = userRepo.findById(id);
+        if(user.isPresent())
+        {
+            Usuario userAtualizado = user.get();
+
+            userAtualizado.setNome(userData.nome());
+            userAtualizado.setEmail(userData.email());
+
+            userRepo.save(userAtualizado);
+            return userMap.toDTO(userAtualizado);
+        }
+
+        return null;
     }
 }

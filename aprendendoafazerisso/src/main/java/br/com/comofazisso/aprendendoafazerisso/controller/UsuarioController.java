@@ -2,6 +2,7 @@ package br.com.comofazisso.aprendendoafazerisso.controller;
 
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioRequestDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioResponseDTO;
+import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioUpdateDTO;
 import br.com.comofazisso.aprendendoafazerisso.entity.Usuario;
 import br.com.comofazisso.aprendendoafazerisso.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,14 @@ public class UsuarioController
     public ResponseEntity<UsuarioResponseDTO> listarPorId(@RequestParam Long id)
     {
         UsuarioResponseDTO userResponse = userService.listarPorId(id);
+
+        return ResponseEntity.ok(userResponse);
+    }
+
+    @PutMapping("/atualizar")
+    public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@RequestParam Long id, @RequestBody UsuarioUpdateDTO userData)
+    {
+        UsuarioResponseDTO userResponse = userService.atualizar(id, userData);
 
         return ResponseEntity.ok(userResponse);
     }
