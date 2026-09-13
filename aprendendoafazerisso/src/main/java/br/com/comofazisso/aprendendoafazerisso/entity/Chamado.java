@@ -7,8 +7,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class Chamado
 {

@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class Interacao
 {
