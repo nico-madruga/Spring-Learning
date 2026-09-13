@@ -5,6 +5,7 @@ import jdk.jfr.Timespan;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +17,7 @@ public class Interacao
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "mensagem")
@@ -26,9 +28,9 @@ public class Interacao
 
     @OneToMany
     @JoinColumn(name = "chamado")
-    private Chamado chamado;
+    private List<Chamado> chamados;
 
     @OneToMany
     @JoinColumn(name = "tecnico")
-    private Tecnico tecnico;
+    private List<Tecnico> tecnicos;
 }
