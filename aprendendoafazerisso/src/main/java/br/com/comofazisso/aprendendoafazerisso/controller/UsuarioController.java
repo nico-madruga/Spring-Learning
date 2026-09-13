@@ -1,12 +1,11 @@
 package br.com.comofazisso.aprendendoafazerisso.controller;
 
+import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioRequestDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioResponseDTO;
+import br.com.comofazisso.aprendendoafazerisso.entity.Usuario;
 import br.com.comofazisso.aprendendoafazerisso.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +21,16 @@ public class UsuarioController
         this.userService = userService;
     }
 
+    @PostMapping()
+    public ResponseEntity<UsuarioResponseDTO> cadastrarUsuario(@RequestBody UsuarioRequestDTO userData)
+    {
+        return ResponseEntity.ok(userService.cadastrarUsuario(userData));
+    }
 
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<List<UsuarioResponseDTO>> listarUsuarios()
     {
         return ResponseEntity.ok(userService.listarUsuarios());
     }
+
 }

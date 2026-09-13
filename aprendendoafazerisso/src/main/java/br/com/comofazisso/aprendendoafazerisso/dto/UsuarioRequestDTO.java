@@ -16,6 +16,7 @@ public record UsuarioRequestDTO(
         String email,
 
         @Size(min = 8, message = "The password be 8 characters long")
+        @NotBlank
         String senha
 )
 {
