@@ -33,4 +33,12 @@ public class UsuarioController
         return ResponseEntity.ok(userService.listarUsuarios());
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<UsuarioResponseDTO> listarPorId(@RequestParam Long id)
+    {
+        UsuarioResponseDTO userResponse = userService.listarPorId(id);
+
+        return ResponseEntity.ok(userResponse);
+    }
+
 }

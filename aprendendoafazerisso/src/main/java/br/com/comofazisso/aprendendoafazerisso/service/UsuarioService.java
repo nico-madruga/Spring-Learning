@@ -39,4 +39,13 @@ public class UsuarioService
 
         return userMap.toDTOList(users);
     }
+
+    public UsuarioResponseDTO listarPorId(Long id)
+    {
+        Optional<Usuario> user = userRepo.findById(id);
+
+        Usuario userEncontrado = user.orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+
+        return userMap.toDTO(userEncontrado);
+    }
 }
