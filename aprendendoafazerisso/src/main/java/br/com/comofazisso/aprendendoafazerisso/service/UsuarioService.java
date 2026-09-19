@@ -4,10 +4,9 @@ import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioRequestDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioResponseDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioUpdateDTO;
 import br.com.comofazisso.aprendendoafazerisso.entity.Usuario;
+import br.com.comofazisso.aprendendoafazerisso.exceptions.UsuarioNotFound;
 import br.com.comofazisso.aprendendoafazerisso.mapper.UsuarioMapper;
 import br.com.comofazisso.aprendendoafazerisso.repository.UsuarioRepository;
-import org.apache.coyote.Response;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,17 +51,8 @@ public class UsuarioService
 
     public UsuarioResponseDTO atualizar(Long id, UsuarioUpdateDTO userData)
     {
-        Optional<Usuario> user = userRepo.findById(id);
-        if(user.isPresent())
-        {
-            Usuario userAtualizado = user.get();
-
-            userAtualizado.setNome(userData.nome());
-            userAtualizado.setEmail(userData.email());
-
-            userRepo.save(userAtualizado);
-            return userMap.toDTO(userAtualizado);
-        }
+        Usuario user = userRepo.findById(id)
+                .orElseThrow(() -> new UsuarioNotFound("Usuario não encontrado"));
 
         return null;
     }
