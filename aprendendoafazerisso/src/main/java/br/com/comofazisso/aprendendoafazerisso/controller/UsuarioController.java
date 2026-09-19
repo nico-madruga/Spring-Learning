@@ -4,6 +4,7 @@ import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioRequestDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioResponseDTO;
 import br.com.comofazisso.aprendendoafazerisso.dto.UsuarioUpdateDTO;
 import br.com.comofazisso.aprendendoafazerisso.service.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,14 @@ public class UsuarioController
         UsuarioResponseDTO userResponse = userService.atualizar(id, userData);
 
         return ResponseEntity.ok(userResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarUsuario(@PathVariable Long id)
+    {
+        UsuarioResponseDTO userResponse = userService.deletar(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("nice tropa");
     }
 
 }
