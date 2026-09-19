@@ -56,4 +56,11 @@ public class UsuarioService
 
         return null;
     }
+
+    public UsuarioResponseDTO deletar(Long id)
+    {
+        userRepo.deleteById(id);
+
+        return null;
+    }
 }
